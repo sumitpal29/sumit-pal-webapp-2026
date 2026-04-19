@@ -77,7 +77,6 @@ export function About({ profile }: AboutProps) {
               </div>
             </div>
           </motion.div>
-
         </motion.div>
       </motion.div>
     </section>
