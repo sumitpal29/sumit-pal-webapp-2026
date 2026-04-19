@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
-import { ThemeToggle } from './theme-toggle';
 
 const navItems = [
   { name: 'About', href: '#about' },
@@ -90,9 +89,6 @@ export function Sidebar({ activeSection }: SidebarProps) {
           >
             Resume
           </a>
-
-          {/* Theme Toggle */}
-          <ThemeToggle />
         </div>
       </aside>
 
@@ -106,7 +102,6 @@ export function Sidebar({ activeSection }: SidebarProps) {
         </Link>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="text-foreground hover:text-primary transition-colors"
