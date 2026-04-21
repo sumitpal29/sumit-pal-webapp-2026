@@ -1,307 +1,258 @@
-# Developer Portfolio
+# sumit-pal-webapp-2026
 
-A pixel-perfect, production-ready developer portfolio built with Next.js 16, TypeScript, Tailwind CSS, and Framer Motion. Features GitHub-powered content, beautiful animations, and full SEO optimization.
+Personal portfolio and blog for [Sumit Pal](https://sumitpal.in) — Staff Software Engineer.
 
-## Features
+Built with Next.js 16 App Router, TypeScript, Tailwind CSS v4, and Framer Motion. Content is managed through a GitHub-backed CMS with no database or CMS service required.
 
-- ✨ **Smooth Animations**: Cursor glow effect, scroll-triggered animations, and page transitions
-- 📱 **Fully Responsive**: Desktop, tablet, and mobile-optimized layout
-- 🎨 **Custom Design System**: Dark theme with teal accents (#0a192f, #64ffda)
-- 🔍 **SEO Optimized**: Metadata, OpenGraph tags, structured data, sitemap, and robots.txt
-- 📝 **GitHub Content**: Auto-fetch projects and blog posts from your GitHub repository
-- ⌨️ **Accessible**: ARIA labels, focus management, reduced motion support
-- 🚀 **Performance**: Optimized images, code splitting, ISR caching
-
-## Getting Started
-
-### 1. Clone and Install
-
-```bash
-npm install
-# or
-pnpm install
-```
-
-### 2. Configure Environment Variables
-
-Copy `.env.example` to `.env.local` and update with your details:
-
-```bash
-cp .env.example .env.local
-```
-
-Fill in your configuration:
-- `NEXT_PUBLIC_GITHUB_OWNER`: Your GitHub username
-- `NEXT_PUBLIC_GITHUB_REPO`: Repository containing your portfolio content
-- `NEXT_PUBLIC_SITE_URL`: Your portfolio domain
-
-### 3. Set Up Content Repository
-
-Create a GitHub repository with the following structure:
-
-```
-content/
-├── projects/
-│   ├── project-1.md
-│   └── project-2.md
-├── blog/
-│   ├── post-1.md
-│   └── post-2.md
-└── experience/
-    ├── job-1.md
-    └── job-2.md
-```
-
-#### Example Project Markdown (content/projects/my-project.md):
-
-```markdown
----
-title: Project Title
-description: Brief description
-tech: [JavaScript, React, Node.js]
-link: https://project-url.com
-github: https://github.com/user/project
-date: 2024-03-15
 ---
 
-Project details and description goes here.
+## Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        Browser                              │
+└──────────────────────────┬──────────────────────────────────┘
+                           │
+┌──────────────────────────▼──────────────────────────────────┐
+│                  Next.js 16 App Router                      │
+│                                                             │
+│  ┌─────────────────┐        ┌──────────────────────────┐   │
+│  │   Server Pages  │        │     Client Components    │   │
+│  │  (RSC, async)   │        │  (animations, scroll,    │   │
+│  │                 │        │   theme, cursor)         │   │
+│  │  /              │        │                          │   │
+│  │  /blogs         │        │  SectionContainer        │   │
+│  │  /blogs/[slug]  │        │  PortfolioLayout         │   │
+│  │  /projects      │        │  ThemeToggle             │   │
+│  │  /experience/   │        │  CursorGlow              │   │
+│  └────────┬────────┘        └──────────────────────────┘   │
+│           │                                                 │
+│  ┌────────▼────────────────────────────────────────────┐   │
+│  │                   lib/cms.ts                        │   │
+│  │         @blog-database/github-client wrapper        │   │
+│  │                                                     │   │
+│  │  getProfileConfigs()   → config/profile-config.json │   │
+│  │  getExperiences()      → metadata/experiences.json  │   │
+│  │  getProjects()         → metadata/projects.json     │   │
+│  │  blogClient.getAllPosts() → indexed markdown files  │   │
+│  │  blogClient.getPost(slug) → single markdown file    │   │
+│  └────────┬────────────────────────────────────────────┘   │
+└───────────┼─────────────────────────────────────────────────┘
+            │ HTTPS (GitHub raw content API)
+┌───────────▼─────────────────────────────────────────────────┐
+│         GitHub Repo: sumitpal29/sumit-pal-portfolio-database │
+│                                                             │
+│  config/profile-config.json   ← about text, skills, email  │
+│  metadata/experiences.json    ← work history                │
+│  metadata/projects.json       ← project list                │
+│  posts/[slug].md              ← blog post markdown          │
+│  posts/index.json             ← pagination index            │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-#### Example Blog Post (content/blog/my-post.md):
-
-```markdown
 ---
-title: Blog Post Title
-description: Post summary
-date: 2024-03-15
-tags: [JavaScript, Web Development]
-author: Your Name
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router, React Server Components) |
+| Language | TypeScript 5.7 |
+| Styling | Tailwind CSS v4 + CSS Modules |
+| Animations | Framer Motion |
+| CMS | `@blog-database/github-client` (local package) |
+| Markdown | `react-markdown` + `remark-gfm` |
+| Fonts | Geist + Geist Mono (via `next/font`) |
+| Analytics | Vercel Analytics |
+| Deployment | Vercel |
+
 ---
-
-# Blog Post Content
-
-Your markdown content here...
-```
-
-#### Example Experience (content/experience/job.md):
-
-```markdown
----
-role: Senior Engineer
-company: Tech Corp
-companyLink: https://techcorp.com
-period: 2022 - Present
-responsibilities:
-  - Led development of feature X
-  - Improved performance by 40%
-  - Mentored junior developers
----
-```
-
-### 4. Update Portfolio Config
-
-Edit `config/portfolio.config.ts` with your information:
-
-```typescript
-export const portfolioConfig = {
-  name: 'Your Name',
-  title: 'Your Title',
-  email: 'your@email.com',
-  social: {
-    github: 'https://github.com/yourname',
-    linkedin: 'https://linkedin.com/in/yourname',
-    twitter: 'https://twitter.com/yourname',
-    codepen: 'https://codepen.io/yourname',
-  },
-  // ... rest of config
-};
-```
-
-### 5. Run Development Server
-
-```bash
-npm run dev
-# or
-pnpm dev
-```
-
-Visit [http://localhost:3000](http://localhost:3000) to see your portfolio.
 
 ## Project Structure
 
 ```
 ├── app/
-│   ├── layout.tsx           # Root layout with SEO metadata
-│   ├── page.tsx             # Main portfolio page
-│   ├── globals.css          # Global styles and design tokens
-│   ├── sitemap.ts           # Dynamic sitemap generation
-│   └── robots.ts            # Robots configuration
+│   ├── layout.tsx                  # Root layout: metadata, JSON-LD Person schema, fonts
+│   ├── page.tsx                    # Homepage — fetches all CMS data server-side
+│   ├── robots.ts                   # /robots.txt
+│   ├── sitemap.ts                  # /sitemap.xml — includes all blog post URLs
+│   ├── blogs/
+│   │   ├── page.tsx                # Blog listing page
+│   │   └── [slug]/
+│   │       ├── page.tsx            # Blog post page — markdown rendering + BlogPosting schema
+│   │       └── blog-post.module.css # Scoped prose typography styles
+│   ├── experience/
+│   │   └── [company]/
+│   │       └── page.tsx            # Detailed experience page
+│   └── projects/
+│       └── page.tsx                # Full project archive (table view)
+│
 ├── components/
 │   └── portfolio/
-│       ├── portfolio-layout.tsx  # Main layout wrapper
-│       ├── sidebar.tsx           # Navigation sidebar
-│       ├── cursor-glow.tsx       # Cursor effect
-│       ├── hero.tsx              # Hero section
-│       ├── about.tsx             # About section
-│       ├── experience.tsx        # Experience timeline
-│       ├── projects.tsx          # Projects grid
-│       ├── blog.tsx              # Blog section
-│       └── contact.tsx           # Contact section
+│       ├── portfolio-layout.tsx    # Root client wrapper — mounts scroll spy, passes activeSection
+│       ├── section-container.tsx   # Two-column sticky layout (40% LHS nav / 60% RHS content)
+│       ├── about.tsx               # About + skills badges
+│       ├── experience.tsx          # Experience cards
+│       ├── projects.tsx            # Featured projects
+│       ├── blog.tsx                # Latest blog posts preview
+│       ├── contact.tsx             # Contact + social links
+│       ├── hero-image.tsx          # Profile photo (Next.js Image)
+│       ├── cursor-glow.tsx         # Canvas-based cursor glow effect
+│       ├── theme-toggle.tsx        # Three-way theme switcher (light / dark / system)
+│       └── theme-provider.tsx      # next-themes provider
+│
 ├── config/
-│   └── portfolio.config.ts   # Portfolio configuration
+│   └── portfolio.config.ts         # Single source of truth: name, title, description,
+│                                   # socials, site URL, OG image
+│
 ├── hooks/
-│   └── use-scroll-spy.ts     # Scroll detection hook
+│   ├── use-scroll-spy.ts           # IntersectionObserver — tracks which section is in viewport
+│   ├── use-mobile.ts               # Responsive breakpoint detection
+│   └── use-toast.ts                # Toast notification hook
+│
 ├── lib/
-│   ├── github-api.ts         # GitHub API client
-│   ├── markdown-parser.ts    # Markdown → HTML parser
-│   ├── seo.ts                # SEO utilities
-│   └── github-content/
-│       └── loader.ts         # Content fetching orchestration
+│   ├── cms.ts                      # CMS client + typed fetch helpers
+│   ├── seo.ts                      # SEO utility functions
+│   └── utils.ts                    # cn() class name helper
+│
+├── styles/
+│   └── globals.css                 # CSS variables (light/dark themes), Tailwind base
+│
+├── public/
+│   ├── og-image.png                # 1200×630 Open Graph image
+│   ├── icon.svg / icon-*.png       # Favicons (light + dark scheme aware)
+│   └── sumit-pal-ai-architect.png  # Profile photo
+│
 └── types/
-    └── content.ts            # TypeScript types
+    └── content.ts                  # Shared TypeScript types
 ```
 
-## Design System
+---
 
-### Colors
-- **Background**: #0a192f (Dark navy)
-- **Text**: #ccd6f6 (Light blue)
-- **Primary**: #64ffda (Cyan)
-- **Secondary**: #8892b0 (Gray)
-- **Border**: #233554 (Navy)
+## Layout System
 
-### Typography
-- **Fonts**: Inter (sans-serif), System fonts fallback
-- **Headings**: 64px/32px/18px scale
-- **Body**: 16-18px with 1.6 line-height
+The homepage uses a **two-column sticky layout**:
 
-### Spacing
-- **Base Unit**: 8px grid
-- **Section Padding**: 80-128px vertical
-
-## Customization
-
-### Change Colors
-
-Edit `app/globals.css` CSS variables:
-
-```css
-:root {
-  --background: #0a192f;
-  --primary: #64ffda;
-  /* ... rest of variables */
-}
+```
+┌──────────────── max-w-[1200px] ─────────────────┐
+│                                                  │
+│  ┌─── 40% (sticky) ───┐  ┌─── 60% (scroll) ───┐ │
+│  │                    │  │                    │ │
+│  │  Name              │  │  About section     │ │
+│  │  Title             │  │  Experience        │ │
+│  │  Description       │  │  Projects          │ │
+│  │                    │  │  Blog              │ │
+│  │  — About      ←    │  │  Contact           │ │
+│  │  — Experience      │  │                    │ │
+│  │  — Projects        │  │                    │ │
+│  │  — Blog            │  │                    │ │
+│  │  — Contact         │  │                    │ │
+│  │                    │  │                    │ │
+│  └────────────────────┘  └────────────────────┘ │
+└──────────────────────────────────────────────────┘
 ```
 
-### Update Section Text
+The left column is `position: sticky; top: 0; height: 100vh`. The active nav item is driven by `useScrollSpy` (IntersectionObserver) passed down from `PortfolioLayout`.
 
-Edit component files directly:
-- Hero: `components/portfolio/hero.tsx`
-- About: `components/portfolio/about.tsx`
-- Experience: `components/portfolio/experience.tsx`
-- Projects: `components/portfolio/projects.tsx`
-- Blog: `components/portfolio/blog.tsx`
-- Contact: `components/portfolio/contact.tsx`
+---
 
-### Customize Animations
+## CMS Data Flow
 
-Framer Motion animations are configured in each section component. Adjust `variants`, `transition`, and `whileHover` props to change animation behavior.
+All content is fetched **server-side at request time** from a separate GitHub repository via the `@blog-database/github-client` package.
 
-## Performance Optimization
+```
+GitHub repo (sumit-pal-portfolio-database)
+  └── config/profile-config.json     →  About text, skills, email, socials
+  └── metadata/experiences.json      →  Array of experience entries
+  └── metadata/projects.json         →  Array of project entries
+  └── posts/<slug>.md                →  Individual blog post (frontmatter + body)
+  └── posts/index.json               →  Pagination index for blog listing
+```
 
-The portfolio is optimized for performance:
+The CMS client (`lib/cms.ts`) wraps the package with typed helpers:
 
-- **Image Optimization**: Next.js Image component with lazy loading
-- **Code Splitting**: Automatic by Next.js
-- **Incremental Static Regeneration (ISR)**: Content cached for 1 hour
-- **CSS-in-JS**: Tailwind CSS with zero runtime overhead
-- **Cursor Canvas**: Hardware-accelerated with requestAnimationFrame
+```typescript
+getProfileConfigs()           // ProfileData | null
+getExperiences()              // ExperienceData[]
+getProjects()                 // ProjectData[]
+blogClient.getAllPosts()       // PostMeta[]
+blogClient.getPost(slug)      // Post  { frontmatter, content }
+```
 
-Target Lighthouse scores:
-- Performance: >95
-- Accessibility: >95
-- SEO: >95
-- Best Practices: >90
+---
+
+## Theme System
+
+Three themes — **candy** (default), **light**, **dark** — implemented via CSS custom properties and `next-themes`.
+
+| Token | Candy (default) | Dark |
+|-------|----------------|------|
+| `--background` | `#fffae3` | `#2a2a2a` |
+| `--foreground` | `#616163` | `#fffae3` |
+| `--primary` | `#fad312` (yellow) | `#fad312` |
+| `--secondary` | `#84b686` (green) | `#839f84` |
+| `--border` | `#e0dec5` | `#4a4a4a` |
+
+---
+
+## SEO
+
+| Page | Metadata |
+|------|----------|
+| All pages | `Person` JSON-LD schema, canonical URL |
+| Homepage | Full OG + Twitter card, `Person` structured data |
+| Blog listing | OG + Twitter card |
+| Blog post | `BlogPosting` JSON-LD, `article` OG type, `publishedTime`, `modifiedTime` |
+| Projects | OG + Twitter card |
+| `/sitemap.xml` | Static pages + all blog post URLs with `lastModified` |
+| `/robots.txt` | Allow all, sitemap pointer |
+
+---
+
+## Getting Started
+
+### 1. Install dependencies
+
+```bash
+yarn install
+```
+
+### 2. Configure environment
+
+```bash
+cp .env.example .env.local
+```
+
+Set your site URL:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+```
+
+### 3. Update config
+
+Edit `config/portfolio.config.ts` with your name, title, description, and social links.
+
+### 4. Point to your content repo
+
+Edit `lib/cms.ts` — update the `CMS_CONFIG` to point to your GitHub repository:
+
+```typescript
+const CMS_CONFIG = {
+  repo: 'your-username/your-content-repo',
+  branch: 'main',
+  project: 'your-project-name',
+};
+```
+
+### 5. Run
+
+```bash
+yarn dev
+```
+
+---
 
 ## Deployment
 
-### Deploy to Vercel (Recommended)
-
-1. Push to GitHub
-2. Import project to Vercel
-3. Set environment variables in Vercel settings
-4. Deploy
-
-### Deploy to Other Platforms
-
-The portfolio is a standard Next.js app and works with any platform supporting Node.js:
-- Netlify
-- AWS Amplify
-- Railway
-- Render
-- Digital Ocean
-
-## Accessibility
-
-The portfolio includes:
-- Semantic HTML structure
-- ARIA labels and roles
-- Focus management
-- Keyboard navigation support
-- Reduced motion support
-- Color contrast compliance
-
-## Analytics (Optional)
-
-The portfolio includes Vercel Analytics by default. To add additional analytics:
-
-1. Update `.env.local` with your analytics ID
-2. Install analytics package: `npm install @vercel/analytics`
-3. Import in `app/layout.tsx`
-
-## Content Updates
-
-When you push new content to your GitHub repository:
-
-1. Changes are automatically fetched (within cache period)
-2. Portfolio rebuilds with new content
-3. No manual deployment needed (with ISR enabled)
-
-To immediately update without waiting for cache:
-- Manually redeploy from Vercel dashboard
-- Or set `revalidate: 0` in loader functions (less performant)
-
-## Troubleshooting
-
-### Content not showing up?
-- Check GitHub token has proper permissions
-- Verify file paths match `portfolio.config.ts`
-- Ensure markdown files have proper frontmatter
-
-### Images not loading?
-- Use full URLs in markdown (`https://...`)
-- Or place images in `/public` directory
-
-### Animations not smooth?
-- Check browser performance
-- Reduce animations for performance testing
-- Ensure no console errors
-
-## License
-
-This portfolio template is open source. Feel free to use it for your own portfolio!
-
-## Support
-
-For issues or questions:
-1. Check the troubleshooting section
-2. Review GitHub Issues
-3. Check Next.js documentation
-4. Open an issue on GitHub
-
-## Resources
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Framer Motion](https://www.framer.com/motion/)
-- [React Documentation](https://react.dev)
+Designed for **Vercel**. Set `NEXT_PUBLIC_SITE_URL` in the Vercel environment variables dashboard, push to `main`, and it deploys automatically.
