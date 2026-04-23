@@ -1,4 +1,4 @@
-import { createBlogClient, buildUrl, fetchJson } from '@blog-database/github-client';
+import { createBlogClient, buildUrl, fetchJson } from 'blog-database-github-client';
 
 const CMS_CONFIG = {
   repo: 'sumitpal29/sumit-pal-portfolio-database',
