@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export function HeroImage() {
   return (
-    <section className="relative w-full flex items-center justify-center pt-24 pb-8 md:pt-32 md:pb-12 px-6 md:px-12 lg:px-16">
+    <section className="relative w-full flex items-center justify-center pt-8 pb-4 md:pt-32 md:pb-12 px-6 md:px-12 lg:px-16">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

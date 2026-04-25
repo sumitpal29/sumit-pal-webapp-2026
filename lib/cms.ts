@@ -55,6 +55,7 @@ export interface ProjectData {
   tech: string[];
   link: string;
   github: string;
+  npm?: string;
   year: string;
 }
 

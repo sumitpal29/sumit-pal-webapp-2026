@@ -40,7 +40,7 @@ export function Contact({ email, socials }: ContactProps) {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex items-center justify-center px-6 md:px-12 lg:px-16 py-20 lg:py-32"
+      className="relative min-[912px]:min-h-screen flex items-center justify-center px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-32"
     >
       <motion.div
         className="max-w-2xl text-center"
@@ -57,14 +57,14 @@ export function Contact({ email, socials }: ContactProps) {
 
         <motion.h3
           variants={itemVariants}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8"
+          className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8"
         >
           Get In Touch
         </motion.h3>
 
         <motion.p
           variants={itemVariants}
-          className="text-secondary leading-relaxed mb-12 max-w-xl mx-auto"
+          className="text-secondary leading-relaxed mb-8 md:mb-12 max-w-xl mx-auto"
         >
           I'm always interested in hearing about new projects and opportunities. Whether you have
           a question or just want to say hi, feel free to reach out!
@@ -73,7 +73,7 @@ export function Contact({ email, socials }: ContactProps) {
         <motion.div variants={itemVariants}>
           <a
             href={`mailto:${displayEmail}`}
-            className="inline-flex items-center gap-3 px-8 py-4 border border-primary text-primary rounded font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-200 mb-12"
+            className="inline-flex items-center gap-3 px-8 py-4 border border-primary text-primary rounded font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-200 mb-8 md:mb-12"
           >
             Say Hello
             <span className="text-xl">→</span>
@@ -82,7 +82,7 @@ export function Contact({ email, socials }: ContactProps) {
 
         <motion.footer
           variants={itemVariants}
-          className="space-y-8 pt-16 border-t border-border"
+          className="space-y-6 pt-10 md:pt-16 border-t border-border"
         >
           <nav className="flex flex-wrap justify-center gap-8">
             {displaySocials.map((social, index) => (

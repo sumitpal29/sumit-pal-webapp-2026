@@ -41,20 +41,71 @@ const navItems = [
 export function SectionContainer({ children, activeSection }: SectionContainerProps) {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    setIsScrolled(latest > 150);
+    setIsScrolled(latest > 80);
   });
 
   const sideAWidthClass = "min-[912px]:w-[40%]";
   const sideBWidthClass = "min-[912px]:w-[60%]";
 
+  function scrollTo(href: string) {
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    setMenuOpen(false);
+  }
+
   return (
+    <>
+      {/* Mobile top nav — hidden on desktop */}
+      <header className={`min-[912px]:hidden fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/90 backdrop-blur border-b border-border' : 'bg-transparent'}`}>
+        <div className="flex items-center justify-between px-6 py-3">
+          <span className={`font-bold text-sm font-mono transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`}>
+            {portfolioConfig.name.split(' ')[0]}
+          </span>
+          <button
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Toggle menu"
+            className="p-2 text-foreground"
+          >
+            {menuOpen ? (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
+
+        {menuOpen && (
+          <nav className="bg-background/95 backdrop-blur border-b border-border px-6 pb-4">
+            <ul className="flex flex-col gap-1">
+              {navItems.map((item) => {
+                const isActive = activeSection === item.href.substring(1);
+                return (
+                  <li key={item.name}>
+                    <button
+                      onClick={() => scrollTo(item.href)}
+                      className={`w-full text-left py-2.5 text-sm font-mono font-bold uppercase tracking-widest transition-colors ${isActive ? 'text-primary' : 'text-secondary'}`}
+                    >
+                      {item.name}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        )}
+      </header>
+
     <div className="mx-auto max-w-[1200px] w-full flex flex-col min-[912px]:flex-row relative px-6 md:px-12 lg:px-16">
 
       {/* Side A */}
       <div
-        className={`w-full ${sideAWidthClass} min-[912px]:sticky min-[912px]:top-0 min-[912px]:h-screen py-12 min-[912px]:py-24 flex flex-col justify-between transition-[width] duration-500 ease-out`}
+        className={`w-full ${sideAWidthClass} min-[912px]:sticky min-[912px]:top-0 min-[912px]:h-screen py-8 min-[912px]:py-24 flex flex-col justify-between transition-[width] duration-500 ease-out`}
       >
         <motion.div
           variants={containerVariants}
@@ -67,7 +118,7 @@ export function SectionContainer({ children, activeSection }: SectionContainerPr
 
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mt-4 md:mt-6"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-4 md:mt-6"
           >
             {portfolioConfig.name}
           </motion.h1>
@@ -125,11 +176,12 @@ export function SectionContainer({ children, activeSection }: SectionContainerPr
 
       {/* Side B */}
       <div
-        className={`w-full ${sideBWidthClass} py-12 min-[912px]:py-24 flex flex-col transition-[width] duration-500 ease-out`}
+        className={`w-full ${sideBWidthClass} py-0 min-[912px]:py-24 flex flex-col transition-[width] duration-500 ease-out`}
       >
         {children}
       </div>
 
     </div>
+    </>
   );
 }

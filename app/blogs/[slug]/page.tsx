@@ -6,6 +6,7 @@ import { blogClient } from '@/lib/cms';
 import { portfolioConfig } from '@/config/portfolio.config';
 import { ThemeToggle } from '@/components/portfolio/theme-toggle';
 import { CursorGlow } from '@/components/portfolio/cursor-glow';
+import { AudioPlayer } from '@/components/portfolio/audio-player';
 import styles from './blog-post.module.css';
 
 function formatBlogDate(raw: string | undefined): string {
@@ -67,6 +68,10 @@ export async function generateMetadata({ params }: Props) {
   }
 }
 
+function readingTime(text: string): number {
+  return Math.max(1, Math.ceil(text.trim().split(/\s+/).length / 200));
+}
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
 
@@ -78,6 +83,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const { frontmatter, content } = post;
+  const minutes = readingTime(content);
 
   const baseUrl = portfolioConfig.site.url;
   const canonicalUrl = `${baseUrl}/blogs/${slug}`;
@@ -134,9 +140,11 @@ export default async function BlogPostPage({ params }: Props) {
             </p>
           )}
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 flex-wrap">
+            <AudioPlayer title={frontmatter.title} content={content} />
             <time className="text-sm font-mono text-muted-foreground">
               {formatBlogDate(frontmatter.createdAt)}
+              <span className="ml-3 opacity-60">· {minutes} min read</span>
               {frontmatter.updatedAt && frontmatter.updatedAt !== frontmatter.createdAt && (
                 <span className="ml-3 opacity-60">
                   · updated {formatBlogDate(frontmatter.updatedAt)}

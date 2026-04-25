@@ -36,7 +36,7 @@ export function About({ profile }: AboutProps) {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-20 lg:py-32"
+      className="relative min-[912px]:min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-32"
       aria-labelledby="about-heading"
     >
       <motion.div
@@ -46,7 +46,7 @@ export function About({ profile }: AboutProps) {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <motion.div variants={itemVariants} className="flex items-center gap-4 mb-12">
+        <motion.div variants={itemVariants} className="flex items-center gap-4 mb-8 md:mb-12">
           <h2 id="about-heading" className="text-3xl md:text-4xl font-bold text-foreground">
             <span className="text-primary">01.</span> About
           </h2>

@@ -35,7 +35,7 @@ export function Experience({ experiences }: ExperienceProps) {
   return (
     <section
       id="experience"
-      className="relative min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-20 lg:py-32"
+      className="relative min-[912px]:min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-32"
     >
       <motion.div
         className="max-w-3xl w-full"
@@ -44,7 +44,7 @@ export function Experience({ experiences }: ExperienceProps) {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <motion.div variants={itemVariants} className="flex items-center gap-4 mb-12">
+        <motion.div variants={itemVariants} className="flex items-center gap-4 mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground whitespace-nowrap">
             <span className="text-primary">02.</span> Experience
           </h2>

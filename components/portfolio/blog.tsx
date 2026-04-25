@@ -54,7 +54,7 @@ export function Blog({ posts }: BlogProps) {
   return (
     <section
       id="blog"
-      className="relative min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-20 lg:py-32"
+      className="relative min-[912px]:min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-32"
     >
       <motion.div
         className="max-w-3xl w-full"
@@ -63,7 +63,7 @@ export function Blog({ posts }: BlogProps) {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <motion.div variants={itemVariants} className="flex items-center gap-4 mb-12">
+        <motion.div variants={itemVariants} className="flex items-center gap-4 mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground whitespace-nowrap">
             <span className="text-primary">04.</span> Blog
           </h2>
@@ -105,7 +105,7 @@ export function Blog({ posts }: BlogProps) {
           ))}
         </div>
 
-        <motion.div variants={itemVariants} className="mt-12 flex justify-end">
+        <motion.div variants={itemVariants} className="mt-12 flex justify-center">
           <Link
             href="/blogs"
             className="inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 border border-primary text-primary rounded font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
