@@ -54,7 +54,7 @@ export function Blog({ posts }: BlogProps) {
   return (
     <section
       id="blog"
-      className="relative min-[912px]:min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-32"
+      className="relative flex items-start justify-start px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20"
     >
       <motion.div
         className="max-w-3xl w-full"

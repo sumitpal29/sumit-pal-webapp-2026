@@ -40,7 +40,7 @@ export function Contact({ email, socials }: ContactProps) {
   return (
     <section
       id="contact"
-      className="relative min-[912px]:min-h-screen flex items-center justify-center px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-32"
+      className="relative flex items-start justify-center px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20"
     >
       <motion.div
         className="max-w-2xl text-center"
@@ -82,7 +82,7 @@ export function Contact({ email, socials }: ContactProps) {
 
         <motion.footer
           variants={itemVariants}
-          className="space-y-6 pt-10 md:pt-16 border-t border-border"
+          className="space-y-6 pt-10 md:pt-12 border-t border-border"
         >
           <nav className="flex flex-wrap justify-center gap-8">
             {displaySocials.map((social, index) => (

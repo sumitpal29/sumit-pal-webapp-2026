@@ -4,10 +4,11 @@ substitutions:
   _REPO: webapp
 
 steps:
-  # Build the Docker image, tagged with both commit SHA (immutable) and latest
+  # Build the Docker image for linux/amd64 (Cloud Run's architecture)
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
+      - '--platform=linux/amd64'
       - '-t'
       - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$COMMIT_SHA'
       - '-t'
@@ -31,6 +32,13 @@ steps:
       - '--image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$COMMIT_SHA'
       - '--region=${_REGION}'
       - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=3000'
+      - '--memory=512Mi'
+      - '--cpu=1'
+      - '--min-instances=0'
+      - '--max-instances=5'
+      - '--set-env-vars=NEXT_PUBLIC_SITE_URL=https://sumitpal.in'
 
 images:
   - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$COMMIT_SHA'

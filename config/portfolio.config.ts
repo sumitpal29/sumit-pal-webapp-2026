@@ -1,9 +1,9 @@
 export const portfolioConfig = {
   // Personal info
   name: 'Sumit Pal',
-  title: 'Staff Software Engineer',
+  title: 'AI Product Builder & Staff Software Engineer ',
   description:
-    'Staff Software Engineer focused on high-performance applications, frontend architecture, developer platforms, and AI-powered ideas.',
+    'An engineer with a founder mindset, focused on high-performance applications, frontend architecture, developer platforms, and AI-powered products.',
   email: 'sumitpal.2993@gmail.com',
 
   // Social links
@@ -16,7 +16,7 @@ export const portfolioConfig = {
   // Site metadata
   site: {
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://sumitpal.in',
-    title: 'Sumit Pal — Staff Software Engineer',
+    title: 'Sumit Pal — AI Web Engineer',
     description:
       'Staff Software Engineer focused on high-performance applications, frontend architecture, developer platforms, and AI-powered ideas.',
     image: '/og-image.png',

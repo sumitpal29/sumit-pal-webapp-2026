@@ -210,8 +210,8 @@ export IMAGE=$REGION-docker.pkg.dev/$PROJECT_ID/webapp/sumit-pal-webapp
 ### Build and push the image
 
 ```bash
-# Build (uses your local Dockerfile)
-docker build -t $IMAGE:latest .
+# Build for linux/amd64 — required if you're on Apple Silicon (M1/M2/M3)
+docker build --platform linux/amd64 -t $IMAGE:latest .
 
 # Push to Artifact Registry
 docker push $IMAGE:latest

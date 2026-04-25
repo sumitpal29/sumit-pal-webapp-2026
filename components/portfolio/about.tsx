@@ -36,7 +36,7 @@ export function About({ profile }: AboutProps) {
   return (
     <section
       id="about"
-      className="relative min-[912px]:min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-32"
+      className="relative min-[912px]:min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20"
       aria-labelledby="about-heading"
     >
       <motion.div

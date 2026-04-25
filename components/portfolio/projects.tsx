@@ -35,7 +35,7 @@ export function Projects({ projects }: ProjectsProps) {
   return (
     <section
       id="projects"
-      className="relative min-[912px]:min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-32"
+      className="relative min-[912px]:min-h-screen flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20"
     >
       <motion.div
         className="max-w-4xl w-full"
@@ -51,7 +51,7 @@ export function Projects({ projects }: ProjectsProps) {
           <div className="hidden md:block flex-grow h-px bg-border max-w-xs" />
         </motion.div>
 
-        <div className="space-y-12 md:space-y-16 lg:space-y-24">
+        <div className="space-y-12 md:space-y-14 lg:space-y-16">
           {displayProjects.map((project, index) => (
             <motion.div
               key={index}

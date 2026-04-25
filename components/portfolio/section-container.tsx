@@ -105,7 +105,7 @@ export function SectionContainer({ children, activeSection }: SectionContainerPr
 
       {/* Side A */}
       <div
-        className={`w-full ${sideAWidthClass} min-[912px]:sticky min-[912px]:top-0 min-[912px]:h-screen py-8 min-[912px]:py-24 flex flex-col justify-between transition-[width] duration-500 ease-out`}
+        className={`w-full ${sideAWidthClass} min-[912px]:sticky min-[912px]:top-0 min-[912px]:h-screen py-8 min-[912px]:py-16 flex flex-col justify-between transition-[width] duration-500 ease-out`}
       >
         <motion.div
           variants={containerVariants}
@@ -176,7 +176,7 @@ export function SectionContainer({ children, activeSection }: SectionContainerPr
 
       {/* Side B */}
       <div
-        className={`w-full ${sideBWidthClass} py-0 min-[912px]:py-24 flex flex-col transition-[width] duration-500 ease-out`}
+        className={`w-full ${sideBWidthClass} py-0 min-[912px]:py-16 flex flex-col transition-[width] duration-500 ease-out`}
       >
         {children}
       </div>

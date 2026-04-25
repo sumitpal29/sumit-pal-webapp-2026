@@ -6,6 +6,12 @@
 
 ## Part 2
 - resume doownload from git
+- book for project
+- deployment
+- deployment strategy
+- extract md files of previous posts
+- mobile version optimisation
+
 
 ## phase one done
 - Blog card date should be in "21 Apr 2026" format, for near by times 2days ago if written within one month
@@ -13,3 +19,8 @@
 - Skills should contain three skills in a row, how about showing them with badges
 - Also personal projects can be shown with badges
 - LHS about, experience, .. scetion, on hover animation should be bit slower. also when i click on any of the links in LHS, it is scrolling to that section with smooth animation. but it is not highlighting the current section in LHS, i mean if ---- tail is extented user will know in which section they are in.
+- link NPM links, if config has a npm link, we should add them if null avoid. use npm icon.
+- view all posts should be centered alligned for all screen types
+- What font we are using? is it good idea to use inter font?
+- How to check SEO score of our web app?
+- Audio Mode: Start with the Web Speech API — it takes ~30 lines of client code, costs nothing, and works on every device.
