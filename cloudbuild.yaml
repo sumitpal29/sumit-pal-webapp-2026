@@ -1,5 +1,5 @@
 substitutions:
-  _REGION: asia-south1
+  _REGION: asia-southeast1
   _SERVICE: sumit-pal-webapp
   _REPO: webapp
 
