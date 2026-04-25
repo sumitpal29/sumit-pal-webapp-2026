@@ -2,13 +2,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getExperiences } from '@/lib/cms';
 
-export async function generateStaticParams() {
-  const experiences = await getExperiences();
-  return experiences.map((exp) => ({
-    company: exp.slug,
-  }));
-}
-
 export default async function DetailedExperiencePage({
   params,
 }: {
