@@ -12,7 +12,12 @@ export default async function Home() {
     getProfileConfigs(),
     getExperiences(),
     getProjects(),
-    blogClient.getAllPosts().catch(() => []), // fallback to empty array if posts or index are missing
+    blogClient.getAllPosts().catch(() => []).then((p: any[]) =>
+      [...p].sort((a, b) =>
+        new Date(b.publishedAt || b.date || b.createdAt || 0).getTime() -
+        new Date(a.publishedAt || a.date || a.createdAt || 0).getTime()
+      )
+    ),
   ]);
 
   return (

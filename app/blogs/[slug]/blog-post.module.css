@@ -98,6 +98,53 @@
   font-size: 0.9rem;
 }
 
+/* highlight.js theme — maps to site CSS variables */
+.prose :global(.hljs) {
+  background: var(--card);
+  color: var(--foreground);
+}
+.prose :global(.hljs-keyword),
+.prose :global(.hljs-selector-tag),
+.prose :global(.hljs-built_in),
+.prose :global(.hljs-name),
+.prose :global(.hljs-tag) {
+  color: var(--primary);
+  font-weight: 600;
+}
+.prose :global(.hljs-string),
+.prose :global(.hljs-attr),
+.prose :global(.hljs-symbol),
+.prose :global(.hljs-bullet),
+.prose :global(.hljs-addition) {
+  color: #87c87c;
+}
+.prose :global(.hljs-title),
+.prose :global(.hljs-section),
+.prose :global(.hljs-type),
+.prose :global(.hljs-class) {
+  color: #e0a060;
+  font-style: italic;
+}
+.prose :global(.hljs-comment),
+.prose :global(.hljs-quote),
+.prose :global(.hljs-deletion),
+.prose :global(.hljs-meta) {
+  color: var(--muted-foreground);
+  opacity: 0.7;
+  font-style: italic;
+}
+.prose :global(.hljs-number),
+.prose :global(.hljs-literal),
+.prose :global(.hljs-variable),
+.prose :global(.hljs-template-variable),
+.prose :global(.hljs-link) {
+  color: #c07fd0;
+}
+.prose :global(.hljs-params),
+.prose :global(.hljs-property) {
+  color: var(--foreground);
+}
+
 .prose :global(hr) {
   border: none;
   border-top: 1px solid var(--border);

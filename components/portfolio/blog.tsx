@@ -54,7 +54,7 @@ export function Blog({ posts }: BlogProps) {
   return (
     <section
       id="blog"
-      className="relative flex items-start justify-start px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20"
+      className="relative flex items-start justify-start px-6 md:px-8 lg:px-10 py-10 md:py-12 lg:py-16"
     >
       <motion.div
         className="max-w-3xl w-full"
@@ -63,7 +63,7 @@ export function Blog({ posts }: BlogProps) {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <motion.div variants={itemVariants} className="flex items-center gap-4 mb-8 md:mb-12">
+        <motion.div variants={itemVariants} className="flex items-center gap-4 mb-6 md:mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground whitespace-nowrap">
             <span className="text-primary">04.</span> Blog
           </h2>
@@ -86,7 +86,7 @@ export function Blog({ posts }: BlogProps) {
 
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <time className="text-sm text-muted-foreground font-mono">
-                    {formatBlogDate(post.date || post.createdAt)}
+                    Published {formatBlogDate(post.publishedAt || post.date || post.createdAt)}
                   </time>
 
                   <div className="flex flex-wrap gap-2">

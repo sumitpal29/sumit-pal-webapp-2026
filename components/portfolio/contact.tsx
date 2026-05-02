@@ -40,7 +40,7 @@ export function Contact({ email, socials }: ContactProps) {
   return (
     <section
       id="contact"
-      className="relative flex items-start justify-center px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20"
+      className="relative flex items-start justify-center px-6 md:px-8 lg:px-10 py-10 md:py-12 lg:py-16"
     >
       <motion.div
         className="max-w-2xl text-center"

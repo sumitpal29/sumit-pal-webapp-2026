@@ -101,7 +101,7 @@ export function SectionContainer({ children, activeSection }: SectionContainerPr
         )}
       </header>
 
-    <div className="mx-auto max-w-[1200px] w-full flex flex-col min-[912px]:flex-row relative px-6 md:px-12 lg:px-16">
+    <div className="mx-auto max-w-[1200px] w-full flex flex-col min-[912px]:flex-row relative px-6 md:px-12 lg:px-12">
 
       {/* Side A */}
       <div
