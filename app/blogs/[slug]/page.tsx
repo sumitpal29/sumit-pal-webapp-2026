@@ -2,11 +2,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
 import { blogClient } from '@/lib/cms';
 import { portfolioConfig } from '@/config/portfolio.config';
 import { ThemeToggle } from '@/components/portfolio/theme-toggle';
 import { CursorGlow } from '@/components/portfolio/cursor-glow';
 import { AudioPlayer } from '@/components/portfolio/audio-player';
+import { Footer } from '@/components/portfolio/footer';
 import styles from './blog-post.module.css';
 
 function formatBlogDate(raw: string | undefined): string {
@@ -167,10 +169,19 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
+        {frontmatter.heroImage && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={frontmatter.heroImage}
+            alt={frontmatter.title}
+            className="w-full h-auto rounded-lg border border-border mb-12"
+          />
+        )}
+
         <div className="h-px bg-border mb-12" />
 
         <article className={styles.prose}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
             {content}
           </ReactMarkdown>
         </article>
@@ -183,6 +194,8 @@ export default async function BlogPostPage({ params }: Props) {
         >
           <span>←</span> Back to all posts
         </Link>
+
+        <Footer />
       </main>
     </div>
   );

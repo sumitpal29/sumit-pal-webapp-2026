@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { blogClient } from '@/lib/cms';
 import { portfolioConfig } from '@/config/portfolio.config';
+import { Footer } from '@/components/portfolio/footer';
 
 const baseUrl = portfolioConfig.site.url;
 
@@ -43,7 +44,12 @@ function formatBlogDate(raw: string | undefined): string {
 }
 
 export default async function BlogsPage() {
-  const displayPosts = await blogClient.getAllPosts().catch(() => []);
+  const allPosts = await blogClient.getAllPosts().catch(() => []);
+  const displayPosts = [...allPosts].sort((a: any, b: any) => {
+    const dateA = new Date(a.publishedAt || a.date || a.createdAt || 0).getTime();
+    const dateB = new Date(b.publishedAt || b.date || b.createdAt || 0).getTime();
+    return dateB - dateA;
+  });
 
 
   return (
@@ -77,7 +83,9 @@ export default async function BlogsPage() {
               <p className="text-secondary leading-relaxed mb-4">{post.excerpt || post.description}</p>
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <time className="text-sm text-muted-foreground font-mono">{formatBlogDate(post.date || post.createdAt)}</time>
+                <time className="text-sm text-muted-foreground font-mono">
+                  Published {formatBlogDate(post.publishedAt || post.date || post.createdAt)}
+                </time>
 
                 <div className="flex flex-wrap gap-2">
                   {(post.tags || post.metatags || []).map((tag: string) => (
@@ -94,6 +102,8 @@ export default async function BlogsPage() {
           </article>
         ))}
       </div>
+
+      <Footer />
     </div>
   );
 }

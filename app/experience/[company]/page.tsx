@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getExperiences } from '@/lib/cms';
+import { Footer } from '@/components/portfolio/footer';
 
 export default async function DetailedExperiencePage({
   params,
@@ -49,7 +50,7 @@ export default async function DetailedExperiencePage({
       </div>
       
       <div className="mt-16 pt-8 border-t border-border">
-        <a 
+        <a
           href={exp.link}
           target="_blank"
           rel="noopener noreferrer"
@@ -61,6 +62,8 @@ export default async function DetailedExperiencePage({
           </svg>
         </a>
       </div>
+
+      <Footer />
     </div>
   );
 }
