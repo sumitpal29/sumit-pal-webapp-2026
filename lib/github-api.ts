@@ -42,7 +42,7 @@ export async function getGitHubFile(path: string): Promise<string> {
       'Accept': 'application/vnd.github.v3.raw',
       ...(github.token && { Authorization: `token ${github.token}` }),
     },
-    next: { revalidate: 3600 }, // Cache for 1 hour
+    next: { revalidate: 300 },
   });
 
   if (!response.ok) {

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getExperiences } from '@/lib/cms';
 import { Footer } from '@/components/portfolio/footer';
+import { ThemeToggle } from '@/components/portfolio/theme-toggle';
 
 export default async function DetailedExperiencePage({
   params,
@@ -18,7 +19,11 @@ export default async function DetailedExperiencePage({
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground py-20 px-6 md:px-12 lg:px-16 container max-w-4xl mx-auto">
+    <div className="relative min-h-screen bg-background text-foreground">
+      <div className="fixed bottom-6 left-6 z-50">
+        <ThemeToggle />
+      </div>
+    <div className="py-20 px-6 md:px-12 lg:px-16 container max-w-4xl mx-auto">
       <div className="mb-12">
         <Link 
           href="/#experience" 
@@ -64,6 +69,7 @@ export default async function DetailedExperiencePage({
       </div>
 
       <Footer />
+    </div>
     </div>
   );
 }
