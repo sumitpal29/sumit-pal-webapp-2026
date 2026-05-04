@@ -37,11 +37,23 @@ function parseFrontMatter(content: string): {
 
   // Parse simple YAML key: value pairs
   const lines = frontMatterString.split('\n');
-  for (const line of lines) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     if (!line.trim()) continue;
 
     const [key, ...valueParts] = line.split(':');
     const value = valueParts.join(':').trim();
+
+    // Handle YAML block scalars: >-, >, |, |-
+    if (value === '>-' || value === '>' || value === '|' || value === '|-') {
+      const blockLines: string[] = [];
+      while (i + 1 < lines.length && (lines[i + 1].startsWith(' ') || lines[i + 1].startsWith('\t'))) {
+        i++;
+        blockLines.push(lines[i].trim());
+      }
+      frontMatter[key.trim()] = blockLines.join(value.startsWith('|') ? '\n' : ' ').trim();
+      continue;
+    }
 
     // Parse different data types
     if (value === 'true') {

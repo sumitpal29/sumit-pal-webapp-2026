@@ -2,6 +2,7 @@ substitutions:
   _REGION: asia-southeast1
   _SERVICE: sumit-pal-webapp
   _REPO: webapp
+  _REVALIDATE_SECRET: ''
 
 steps:
   # Build the Docker image for linux/amd64 (Cloud Run's architecture)
@@ -38,7 +39,7 @@ steps:
       - '--cpu=1'
       - '--min-instances=0'
       - '--max-instances=5'
-      - '--set-env-vars=NEXT_PUBLIC_SITE_URL=https://sumitpal.in'
+      - '--set-env-vars=NEXT_PUBLIC_SITE_URL=https://sumitpal.in,REVALIDATE_SECRET=${_REVALIDATE_SECRET}'
 
 images:
   - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$COMMIT_SHA'
