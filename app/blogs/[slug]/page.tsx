@@ -169,7 +169,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
-        {frontmatter.heroImage && (
+        {frontmatter.heroImage && frontmatter.heroImage.startsWith('http') && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={frontmatter.heroImage}
