@@ -32,9 +32,10 @@ interface SectionContainerProps {
 
 const navItems = [
   { name: 'About', href: '#about' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Personal Projects', href: '#projects' },
   { name: 'Blog', href: '#blog' },
+  { name: 'Lab', href: '#lab' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
 ];
 

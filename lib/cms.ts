@@ -5,7 +5,15 @@ const CMS_CONFIG = {
   branch: 'main',
   project: 'sumit-portfolio-website',
   cacheTtl: 300_000,
-  useLocalStorage: false, // In Next.js SSR, localStorage is not available
+  useLocalStorage: false,
+};
+
+const KNOWLEDGE_BASE_CMS_CONFIG = {
+  repo: 'sumitpal29/sumit-pal-portfolio-database',
+  branch: 'main',
+  project: 'knowledge-base',
+  cacheTtl: 300_000,
+  useLocalStorage: false,
 };
 
 export const blogClient = createBlogClient(CMS_CONFIG);
@@ -19,6 +27,10 @@ async function fetchCmsJson<T>(filePath: string): Promise<T | null> {
     console.error(`[CMS] Failed to fetch ${filePath}:`, error);
     return null;
   }
+}
+
+export function buildKnowledgeBaseUrl(filePath: string): string {
+  return buildUrl(KNOWLEDGE_BASE_CMS_CONFIG, filePath);
 }
 
 // Data fetching helpers for our portfolio
@@ -61,5 +73,22 @@ export interface ProjectData {
 
 export async function getProjects(): Promise<ProjectData[]> {
   const data = await fetchCmsJson<ProjectData[]>('metadata/projects.json');
+  return data ?? [];
+}
+
+export interface LabAppData {
+  id: string;
+  name: string;
+  description: string;
+  shortDescription: string;
+  href: string;
+  icon: string;
+  tags: string[];
+  status: 'live' | 'wip';
+}
+
+export async function getLabApps(): Promise<LabAppData[]> {
+  // Stored at sumit-portfolio-website/metadata/lab-apps.json in the CMS repo
+  const data = await fetchCmsJson<LabAppData[]>('metadata/lab-apps.json');
   return data ?? [];
 }

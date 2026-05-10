@@ -26,9 +26,10 @@ export const portfolioConfig = {
   // Navigation
   navigation: [
     { name: 'About', href: '#about' },
+    { name: 'Blog', href: '#blog' },
+    { name: 'Lab', href: '/apps' },
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Blog', href: '#blog' },
     { name: 'Contact', href: '#contact' },
   ],
 
