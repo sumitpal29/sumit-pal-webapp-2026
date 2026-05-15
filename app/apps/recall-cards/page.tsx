@@ -8,6 +8,16 @@ import { TagSelector } from '@/components/apps/recall-cards/TagSelector';
 import { loadTagMap } from '@/lib/recall-cards/deck-loader';
 import { getSessions, removeSession, getPrefs } from '@/lib/recall-cards/storage';
 import type { TagMap, ActiveSession } from '@/lib/recall-cards/types';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 export default function RecallCardsPage() {
   const router = useRouter();
@@ -15,6 +25,7 @@ export default function RecallCardsPage() {
   const [selected, setSelected] = useState<string[]>([]);
   const [pausedSessions, setPausedSessions] = useState<ActiveSession[]>([]);
   const [loading, setLoading] = useState(true);
+  const [pendingRemoveId, setPendingRemoveId] = useState<string | null>(null);
 
   useEffect(() => {
     loadTagMap().then((map) => {
@@ -42,16 +53,15 @@ export default function RecallCardsPage() {
     router.push(`/apps/recall-cards/session?tags=${selected.join(',')}`);
   };
 
-  const handleRemoveSession = (id: string) => {
-    const confirmed = window.confirm(
-      'Remove this paused session? Your card progress is safe — only the current queue will be lost.'
-    );
-    if (!confirmed) return;
-    removeSession(id);
-    setPausedSessions((prev) => prev.filter((s) => s.id !== id));
+  const confirmRemoveSession = () => {
+    if (!pendingRemoveId) return;
+    removeSession(pendingRemoveId);
+    setPausedSessions((prev) => prev.filter((s) => s.id !== pendingRemoveId));
+    setPendingRemoveId(null);
   };
 
   return (
+    <>
     <main className="max-w-2xl mx-auto px-6 py-12 md:py-20 flex flex-col gap-10">
       {/* Page header */}
       <div className="flex items-start justify-between">
@@ -111,7 +121,7 @@ export default function RecallCardsPage() {
                   Resume →
                 </button>
                 <button
-                  onClick={() => handleRemoveSession(session.id)}
+                  onClick={() => setPendingRemoveId(session.id)}
                   aria-label="Remove session"
                   className="text-muted-foreground hover:text-destructive transition-colors"
                 >
@@ -155,5 +165,26 @@ export default function RecallCardsPage() {
         )}
       </div>
     </main>
+
+      <AlertDialog open={pendingRemoveId !== null} onOpenChange={(open) => !open && setPendingRemoveId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Remove paused session?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Your card progress is safe — only the current queue will be lost.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmRemoveSession}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Remove
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }

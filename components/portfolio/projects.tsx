@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { ProjectData } from '@/lib/cms';
+import { ProjectReadmeSheet } from './project-readme-sheet';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -30,7 +31,7 @@ interface ProjectsProps {
 }
 
 export function Projects({ projects }: ProjectsProps) {
-  const displayProjects = projects ?? [];
+  const displayProjects = (projects ?? []).slice(0, 3);
 
   return (
     <section
@@ -79,7 +80,8 @@ export function Projects({ projects }: ProjectsProps) {
                   ))}
                 </div>
 
-                <div className="flex gap-4">
+                <div className="flex items-center gap-4">
+                  <ProjectReadmeSheet project={project} />
                   {project.link && (
                     <Link
                       href={project.link}
