@@ -65,7 +65,7 @@ export function Blog({ posts }: BlogProps) {
       >
         <motion.div variants={itemVariants} className="flex items-center gap-4 mb-6 md:mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground whitespace-nowrap">
-            <span className="text-primary">04.</span> Blog
+            <span className="text-primary">02.</span> Blog
           </h2>
           <div className="hidden md:block flex-grow h-px bg-border max-w-xs" />
         </motion.div>
@@ -105,13 +105,13 @@ export function Blog({ posts }: BlogProps) {
           ))}
         </div>
 
-        <motion.div variants={itemVariants} className="mt-12 flex justify-center">
+        <motion.div variants={itemVariants} className="mt-10">
           <Link
             href="/blogs"
-            className="inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 border border-primary text-primary rounded font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-sm font-mono text-primary hover:text-foreground transition-colors group"
           >
             View all posts
-            <span className="ml-2">→</span>
+            <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
           </Link>
         </motion.div>
       </motion.div>

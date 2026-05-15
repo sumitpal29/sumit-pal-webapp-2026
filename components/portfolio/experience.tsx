@@ -46,7 +46,7 @@ export function Experience({ experiences }: ExperienceProps) {
       >
         <motion.div variants={itemVariants} className="flex items-center gap-4 mb-6 md:mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground whitespace-nowrap">
-            <span className="text-primary">02.</span> Experience
+            <span className="text-primary">04.</span> Experience
           </h2>
           <div className="hidden md:block flex-grow h-px bg-border max-w-xs" />
         </motion.div>

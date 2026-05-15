@@ -1,0 +1,42 @@
+[
+  {
+    "id": "recall-cards",
+    "name": "Recall Cards",
+    "description": "Spaced-repetition flashcards for interview prep and learning. Pick a topic, flip cards, self-rate — the SM-2 algorithm decides when each card returns based on how well you knew it.",
+    "shortDescription": "Spaced-repetition flashcards. SM-2 decides what comes back.",
+    "href": "/apps/recall-cards",
+    "icon": "BrainCircuit",
+    "tags": ["study", "productivity", "interview-prep"],
+    "status": "live"
+  },
+  {
+    "id": "brain-dump",
+    "name": "Brain Dump",
+    "description": "Empty your head in seconds. Type whatever is cluttering your mind — worries, ideas, to-dos, random thoughts — and let it go. Clears mental noise so you can focus on what matters.",
+    "shortDescription": "Empty your head in seconds. Clear mental clutter, then focus.",
+    "href": "/apps/brain-dump",
+    "icon": "Wind",
+    "tags": ["mindfulness", "journaling", "clarity"],
+    "status": "wip"
+  },
+  {
+    "id": "pomodoro",
+    "name": "Pomodoro",
+    "description": "Work and study timer with a twist: draw a mindmap of your session goals and convert nodes directly into timed tasks. Focus intervals, break reminders, and a visual record of what you shipped.",
+    "shortDescription": "Work timer with mindmap — convert goals into timed tasks.",
+    "href": "/apps/pomodoro",
+    "icon": "Timer",
+    "tags": ["focus", "pomodoro", "mindmap"],
+    "status": "wip"
+  },
+  {
+    "id": "sticky-notes",
+    "name": "Sticky Notes",
+    "description": "Colourful sticky notes that live in your browser. Pin thoughts, links, or reminders on a freeform canvas. Pairs with Brain Dump — promote a dump entry to a sticky in one click.",
+    "shortDescription": "Colourful sticky notes on a freeform canvas.",
+    "href": "/apps/sticky-notes",
+    "icon": "StickyNote",
+    "tags": ["notes", "canvas", "quick-capture"],
+    "status": "wip"
+  }
+]

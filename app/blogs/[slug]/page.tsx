@@ -5,7 +5,6 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import { blogClient } from '@/lib/cms';
 import { portfolioConfig } from '@/config/portfolio.config';
-import { ThemeToggle } from '@/components/portfolio/theme-toggle';
 import { CursorGlow } from '@/components/portfolio/cursor-glow';
 import { AudioPlayer } from '@/components/portfolio/audio-player';
 import { Footer } from '@/components/portfolio/footer';
@@ -119,10 +118,6 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <CursorGlow />
-      <div className="fixed bottom-6 left-6 z-50">
-        <ThemeToggle />
-      </div>
-
       <main className="relative z-10 max-w-3xl mx-auto px-6 md:px-12 py-20 md:py-28">
         <Link
           href="/blogs"
@@ -169,7 +164,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
-        {frontmatter.heroImage && (
+        {frontmatter.heroImage && frontmatter.heroImage.startsWith('http') && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={frontmatter.heroImage}

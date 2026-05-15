@@ -51,7 +51,7 @@ export function Contact({ email, socials }: ContactProps) {
       >
         <motion.div variants={itemVariants} className="mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            <span className="text-primary">05.</span> What's Next?
+            <span className="text-primary">06.</span> What's Next?
           </h2>
         </motion.div>
 
