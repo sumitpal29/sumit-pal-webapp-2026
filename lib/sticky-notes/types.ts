@@ -2,6 +2,8 @@ export interface StickyNoteData {
   id: string;
   content: string;
   colorId: string;
+  fontId?: string;
+  fontSize?: number;
   x: number;
   y: number;
   width: number;
