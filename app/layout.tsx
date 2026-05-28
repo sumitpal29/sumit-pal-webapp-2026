@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { portfolioConfig } from '@/config/portfolio.config'
 import { ThemeProvider } from '@/components/portfolio/theme-provider'
 import './globals.css'
@@ -115,6 +116,7 @@ export default function RootLayout({
           {children}
           <Analytics />
         </ThemeProvider>
+        <GoogleAnalytics gaId="G-6FJG6LJXCT" />
       </body>
     </html>
   )
