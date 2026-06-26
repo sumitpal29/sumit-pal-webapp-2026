@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
 export default async function ContactPage() {
   const profile = await getProfileConfigs();
-  const displayEmail = profile?.email || portfolioConfig.email;
+  const displayEmail = portfolioConfig.email;
   const socials = profile?.socials ?? [];
 
   return (

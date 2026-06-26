@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { portfolioConfig } from '@/config/portfolio.config';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,7 +30,7 @@ interface ContactProps {
 }
 
 export function Contact({ email, socials }: ContactProps) {
-  const displayEmail = email || 'hello@example.com';
+  const displayEmail = portfolioConfig.email;
   const displaySocials = socials?.length ? socials : [
     { name: 'Twitter', href: 'https://twitter.com' },
     { name: 'GitHub', href: 'https://github.com' },
