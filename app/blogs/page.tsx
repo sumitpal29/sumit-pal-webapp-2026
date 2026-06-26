@@ -1,3 +1,5 @@
+export const revalidate = 300; // re-fetch CMS data every 5 minutes
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { blogClient } from '@/lib/cms';

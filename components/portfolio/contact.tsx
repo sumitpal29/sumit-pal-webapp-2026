@@ -51,7 +51,7 @@ export function Contact({ email, socials }: ContactProps) {
       >
         <motion.div variants={itemVariants} className="mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            <span className="text-primary">06.</span> What's Next?
+            <span className="text-primary">05.</span> What's Next?
           </h2>
         </motion.div>
 
@@ -96,6 +96,23 @@ export function Contact({ email, socials }: ContactProps) {
               >
                 {social.name}
               </a>
+            ))}
+          </nav>
+
+          <nav className="flex flex-wrap justify-center gap-6">
+            {[
+              { name: 'About', href: '/about' },
+              { name: 'Contact', href: '/contact' },
+              { name: 'Privacy', href: '/privacy' },
+              { name: 'Terms', href: '/terms' },
+            ].map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                {link.name}
+              </Link>
             ))}
           </nav>
 

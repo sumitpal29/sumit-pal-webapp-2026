@@ -24,6 +24,15 @@ export function Footer() {
               {item.name}
             </Link>
           ))}
+          {portfolioConfig.legalLinks.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-xs font-mono font-bold uppercase tracking-widest text-secondary hover:text-foreground transition-colors"
+            >
+              {item.name}
+            </Link>
+          ))}
         </nav>
 
         <div className="flex items-center gap-4">

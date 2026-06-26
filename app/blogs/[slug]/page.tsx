@@ -1,3 +1,5 @@
+export const revalidate = 300; // re-fetch post content every 5 minutes
+
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';

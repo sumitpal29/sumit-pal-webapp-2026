@@ -4,7 +4,7 @@ export const portfolioConfig = {
   title: 'AI Product Builder & Staff Software Engineer ',
   description:
     'An engineer with a founder mindset, focused on high-performance applications, frontend architecture, developer platforms, and AI-powered products.',
-  email: 'sumitpal.2993@gmail.com',
+  email: 'app.sumitp@gmail.com',
 
   // Social links
   social: {
@@ -25,12 +25,19 @@ export const portfolioConfig = {
 
   // Navigation
   navigation: [
-    { name: 'About', href: '#about' },
+    { name: 'About', href: '/about' },
     { name: 'Blog', href: '#blog' },
     { name: 'Lab', href: '/apps' },
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' },
+  ],
+
+  // Legal / footer links
+  legalLinks: [
+    { name: 'Contact', href: '/contact' },
+    { name: 'Privacy', href: '/privacy' },
+    { name: 'Terms', href: '/terms' },
   ],
 
   // Skills
