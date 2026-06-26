@@ -36,8 +36,8 @@ function renderBlock(block: Block, bi: number, textColor: string, base: number) 
   if (block.type === 'h1') return <p key={bi} style={{ fontSize: Math.round(base * 1.3), fontWeight: 700 }} className="leading-snug mb-0.5">{inlines}</p>;
   if (block.type === 'h2') return <p key={bi} style={{ fontSize: Math.round(base * 1.15), fontWeight: 700 }} className="leading-snug mb-0.5">{inlines}</p>;
   if (block.type === 'h3') return <p key={bi} style={{ fontSize: base, fontWeight: 600, opacity: 0.8 }} className="leading-snug mb-0.5">{inlines}</p>;
-  if (block.type === 'bullet') return <p key={bi} className="flex gap-1.5 leading-snug"><span className="shrink-0 mt-px opacity-60">•</span><span>{inlines}</span></p>;
-  return <p key={bi} className="leading-snug min-h-[1em]">{inlines}</p>;
+  if (block.type === 'bullet') return <p key={bi} style={{ fontSize: base }} className="flex gap-1.5 leading-snug"><span className="shrink-0 mt-px opacity-60">•</span><span>{inlines}</span></p>;
+  return <p key={bi} style={{ fontSize: base }} className="leading-snug min-h-[1em]">{inlines}</p>;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

@@ -10,7 +10,7 @@ interface PortfolioLayoutProps {
   children: ReactNode;
 }
 
-const sections = ['hero', 'about', 'blog', 'lab', 'experience', 'projects', 'contact'];
+const sections = ['hero', 'blog', 'lab', 'experience', 'projects', 'contact'];
 
 export function PortfolioLayout({ children }: PortfolioLayoutProps) {
   const activeSection = useScrollSpy(sections);

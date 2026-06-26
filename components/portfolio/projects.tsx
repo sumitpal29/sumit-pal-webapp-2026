@@ -47,7 +47,7 @@ export function Projects({ projects }: ProjectsProps) {
       >
         <motion.div variants={itemVariants} className="flex items-center gap-4 mb-6 md:mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground whitespace-nowrap">
-            <span className="text-primary">05.</span> Personal Projects
+            <span className="text-primary">04.</span> Personal Projects
           </h2>
           <div className="hidden md:block flex-grow h-px bg-border max-w-xs" />
         </motion.div>

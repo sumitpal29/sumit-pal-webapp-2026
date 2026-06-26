@@ -1,6 +1,7 @@
+export const revalidate = 300; // re-fetch CMS data every 5 minutes
+
 import { PortfolioLayout } from '@/components/portfolio/portfolio-layout';
 import { HeroImage } from '@/components/portfolio/hero-image';
-import { About } from '@/components/portfolio/about';
 import { Blog } from '@/components/portfolio/blog';
 import { Lab } from '@/components/portfolio/lab';
 import { Experience } from '@/components/portfolio/experience';
@@ -25,7 +26,6 @@ export default async function Home() {
   return (
     <PortfolioLayout>
       <HeroImage />
-      <About profile={profile} />
       <Blog posts={posts} />
       <Lab apps={labApps} />
       <Experience experiences={experiences} />

@@ -31,7 +31,6 @@ interface SectionContainerProps {
 }
 
 const navItems = [
-  { name: 'About', href: '#about' },
   { name: 'Blog', href: '#blog' },
   { name: 'Lab', href: '#lab' },
   { name: 'Experience', href: '#experience' },
@@ -85,15 +84,20 @@ export function SectionContainer({ children, activeSection }: SectionContainerPr
           <nav className="bg-background/95 backdrop-blur border-b border-border px-6 pb-4">
             <ul className="flex flex-col gap-1">
               {navItems.map((item) => {
-                const isActive = activeSection === item.href.substring(1);
+                const isAnchor = item.href.startsWith('#');
+                const isActive = isAnchor && activeSection === item.href.substring(1);
+                const cls = `w-full text-left py-2.5 text-sm font-mono font-bold uppercase tracking-widest transition-colors ${isActive ? 'text-primary' : 'text-secondary'}`;
                 return (
                   <li key={item.name}>
-                    <button
-                      onClick={() => scrollTo(item.href)}
-                      className={`w-full text-left py-2.5 text-sm font-mono font-bold uppercase tracking-widest transition-colors ${isActive ? 'text-primary' : 'text-secondary'}`}
-                    >
-                      {item.name}
-                    </button>
+                    {isAnchor ? (
+                      <button onClick={() => scrollTo(item.href)} className={cls}>
+                        {item.name}
+                      </button>
+                    ) : (
+                      <Link href={item.href} onClick={() => setMenuOpen(false)} className={cls}>
+                        {item.name}
+                      </Link>
+                    )}
                   </li>
                 );
               })}
@@ -142,7 +146,8 @@ export function SectionContainer({ children, activeSection }: SectionContainerPr
           <motion.nav variants={itemVariants} className="mt-16 hidden min-[912px]:block">
             <ul className="flex flex-col w-max">
               {navItems.map((item) => {
-                const isActive = activeSection === item.href.substring(1);
+                const isAnchor = item.href.startsWith('#');
+                const isActive = isAnchor && activeSection === item.href.substring(1);
                 return (
                   <li key={item.name}>
                     <Link
@@ -150,10 +155,10 @@ export function SectionContainer({ children, activeSection }: SectionContainerPr
                       className={`group flex items-center py-3 transition-colors duration-700 ${
                         isActive ? 'text-foreground' : 'text-secondary hover:text-foreground'
                       }`}
-                      onClick={(e) => {
+                      onClick={isAnchor ? (e) => {
                         e.preventDefault();
                         document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
-                      }}
+                      } : undefined}
                     >
                       <span
                         className={`mr-4 h-px transition-all duration-700 ease-out ${
